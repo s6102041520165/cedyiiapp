@@ -13,14 +13,8 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor/behat/
-/vendor/bin/
-/vendor/bower-asset/
-/vendor/cebe/
-/vendor/cedeception/
-/vendor/behat/
-/vendor/almasaeed2010/
-^vendor/*$
+
+!/vendor/themes/*
 # composer itself is not needed
 composer.phar
 
