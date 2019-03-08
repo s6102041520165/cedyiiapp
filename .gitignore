@@ -13,8 +13,8 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-
-!/vendor/themes/*
+!/vendor/themes/
+/vendor/*
 # composer itself is not needed
 composer.phar
 
