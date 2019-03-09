@@ -6,13 +6,13 @@
         <div class="user-panel" >
             <div class="pull-left image">
                 <img src="<?php 
-                if(Yii::$app->user->identity->picture!=NULL)
+                if(isset(Yii::$app->user->identity->picture))
                     echo Yii::$app->user->identity->picture;
                 else 
                    echo $directoryAsset."/img/user.png" ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-            <?php if(Yii::$app->user->identity->username!=NULL) { ?>
+            <?php if(isset(Yii::$app->user->identity->username)) { ?>
                 <p class="text-info"><?= Yii::$app->user->identity->fname." ".Yii::$app->user->identity->lname; ?></p>
 
                 <a href="#" class="text-black"><i class="fa fa-circle text-success"></i> ออนไลน์</a>
@@ -42,9 +42,9 @@
                 'items' => [
                     ['label'=>'เมนู','options'=>['class' => 'bg-primary header']],
                     ['label' => 'ลงชื่อเข้าใช้', 'icon' => 'lock' , 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'จองโต๊ะ', 'icon' => 'circle' , 'url' => ['/booking'],'visible'=> Yii::$app->user->identity],
-                    ['label' => 'แจ้งชำระเงิน', 'icon' => 'circle', 'url' => ['/booking/payment'],'visible'=> Yii::$app->user->identity->username],
-                    ['label' => 'บัตรเข้างาน', 'icon' => 'circle', 'url' => ['/booking/about'],'visible'=> Yii::$app->user->identity->username],
+                    ['label' => 'จองโต๊ะ', 'icon' => 'circle' , 'url' => ['/booking'],'visible'=> isset(Yii::$app->user->identity->username)],
+                    ['label' => 'แจ้งชำระเงิน', 'icon' => 'circle', 'url' => ['/booking/payment'],'visible'=> isset(Yii::$app->user->identity->username)],
+                    ['label' => 'บัตรเข้างาน', 'icon' => 'circle', 'url' => ['/booking/about'],'visible'=> isset(Yii::$app->user->identity->username)],
                     /*['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     [

@@ -22,15 +22,15 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         
-                        <?php if(Yii::$app->user->identity->picture==NULL){ ?>
+                        <?php if(!(isset(Yii::$app->user->identity->picture))){ ?>
                             <img src="<?= $directoryAsset ?>/img/user.png" class="user-image" alt="User Image" />
-                        <?php  } else { ?>
+                        <?php  } else { Yii::$app->user->identity->picture = ''; ?>
                             <img src="<?= Yii::$app->user->identity->picture ?>" class="user-image" alt="User Image" />
                             
                         <?php } ?>
 
                         
-                        <?php if(Yii::$app->user->identity->username==NULL){ ?>
+                        <?php if(!isset(Yii::$app->user->identity->username)){ ?>
                             <span class="hidden-xs">ผู้ใช้ทั่วไป</span>
                         <?php } else { ?>
                             <span class="hidden-xs"><?=Yii::$app->user->identity->username;?></span>
@@ -40,14 +40,14 @@ use yii\helpers\Html;
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <?php if(Yii::$app->user->identity->picture==NULL){ ?>
+                            <?php if(!isset(Yii::$app->user->identity->picture)){ ?>
                                 <img src="<?= $directoryAsset ?>/img/user.png" class="img-circle" alt="User Image" />
                             <?php  } else { ?>
                                 <img src="<?= Yii::$app->user->identity->picture ?>" class="img-circle" alt="User Image" />
                             <?php } ?>
 
                             <p>
-                                <?php if(Yii::$app->user->identity->username!=NULL) {
+                                <?php if(isset(Yii::$app->user->identity->username)) {
                                     echo Yii::$app->user->identity->username;
                                 } else { ?>
                                     ผู้ใช้ทั่วไป
