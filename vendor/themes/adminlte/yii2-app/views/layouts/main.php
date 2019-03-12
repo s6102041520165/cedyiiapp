@@ -36,6 +36,9 @@ if (Yii::$app->controller->action->id === 'login') {
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->registerCssFile("https://use.fontawesome.com/releases/v5.7.1/css/all.css"); ?>
         <?php $this->registerCss("
+        .content-wrapper{
+            background-color:white;
+        }
         .main-sidebar { 
             background-color: #d5e1df !important; 
         }
@@ -61,8 +64,12 @@ if (Yii::$app->controller->action->id === 'login') {
             background: #6cf46c;
         }
         "); ?>
+
+        
         
         <?php $this->head() ?>
+
+        
     </head>
     <body class="hold-transition skin-green sidebar-mini">
     <?php $this->beginBody() ?>
@@ -87,7 +94,22 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+    
     </body>
     </html>
     <?php $this->endPage() ?>
+    <script>
+
+        $(document).ready(function(){
+            setInterval(function(){
+                $.ajax({
+                    'url':'orders/checkorder',
+                    'success': function(response){
+                        
+                    }
+                });
+            }, 10000);
+        });
+
+        </script>
 <?php } ?>

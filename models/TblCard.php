@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "tbl_card".
  *
- * @property int $orderID
+ * @property int $detailID
  * @property double $amount
  * @property string $datepay
  */
 class TblCard extends \yii\db\ActiveRecord
 {
-    public $orderID;
+    public $detailID;
     public $amount;
     public $datepay;
     /**
@@ -30,11 +30,11 @@ class TblCard extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['orderID', 'amount', 'datepay'], 'required'],
-            [['orderID'], 'integer'],
+            [['detailID', 'amount', 'datepay'], 'required'],
+            [['detailID'], 'integer'],
             [['amount'], 'number'],
             [['datepay'], 'safe'],
-            [['orderID'], 'unique'],
+            [['detailID'], 'unique'],
         ];
     }
 
@@ -44,7 +44,7 @@ class TblCard extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'orderID' => 'Order I D',
+            'detailID' => 'Order I D',
             'amount' => 'Amount',
             'datepay' => 'Datepay',
         ];

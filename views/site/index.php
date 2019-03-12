@@ -8,8 +8,8 @@ $this->title='ComEdu Homecoming';
 
     <div class="body-content">
 
-        <div class="row">
-            
+        <div class="container" align="center">
+            <img style="width:80%" src="<?=Yii::$app->request->BaseUrl;?>/img/hcm_poster.png"/>
         </div>
 
     </div>

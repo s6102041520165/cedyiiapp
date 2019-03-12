@@ -39,6 +39,7 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+            
         ];
     }
 
@@ -61,6 +62,7 @@ class SiteController extends Controller
             ],
         ];
     }
+    
 
     public function oAuthSuccess($client) {
         // get user data from client
@@ -70,6 +72,7 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('error', 'กรุณากด Allow Access ใน Facebook เพื่อใช้งาน Facebook Login');
             return $this->redirect('/site/login');
         }
+
         $user = User::findOne(['email' => $userAttributes['email']]);
 
         //Have user on system.
@@ -80,7 +83,6 @@ class SiteController extends Controller
                 $user->save();
             }
             $login = new User();
-
             $login->login($user->email);
            /*Yii::$app->getUser()->login($user);  
             var_dump($user); 
@@ -115,14 +117,13 @@ class SiteController extends Controller
             $new_user->email = $userAttributes['email'];
             $new_user->fname = $fname;
             $new_user->lname = $lname;
-            $new_user->picture = $userAttributes['picture'];
+            $new_user->role = User::ROLE_USER;
+            $new_user->pictures = isset($userAttributes['picture'])? $userAttributes['picture'] : '';
             $new_user->status = User::STATUS_ACTIVE;
 
-            print_r($new_user->save());
-
-
+            $new_user->save();
             
-            $new_user->login($new_user->email);
+            $new_user->login($userAttributes['email']);
             
         }
         return $this->render('index');
@@ -140,11 +141,6 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
     public function actionLogin()
     {
         
@@ -152,12 +148,6 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -175,31 +165,4 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }

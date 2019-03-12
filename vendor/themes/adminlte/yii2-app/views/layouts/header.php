@@ -22,13 +22,8 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         
-                        <?php if(!(isset(Yii::$app->user->identity->picture))){ ?>
-                            <img src="<?= $directoryAsset ?>/img/user.png" class="user-image" alt="User Image" />
-                        <?php  } else { Yii::$app->user->identity->picture = ''; ?>
-                            <img src="<?= Yii::$app->user->identity->picture ?>" class="user-image" alt="User Image" />
+                        <img src="<?=(isset(Yii::$app->user->identity->pictures))?Yii::$app->user->identity->pictures:$directoryAsset."/img/user.png";?>" class="user-image" alt="User Image" />
                             
-                        <?php } ?>
-
                         
                         <?php if(!isset(Yii::$app->user->identity->username)){ ?>
                             <span class="hidden-xs">ผู้ใช้ทั่วไป</span>
@@ -40,13 +35,9 @@ use yii\helpers\Html;
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <?php if(!isset(Yii::$app->user->identity->picture)){ ?>
-                                <img src="<?= $directoryAsset ?>/img/user.png" class="img-circle" alt="User Image" />
-                            <?php  } else { ?>
-                                <img src="<?= Yii::$app->user->identity->picture ?>" class="img-circle" alt="User Image" />
-                            <?php } ?>
-
+                            <img src="<?=(isset(Yii::$app->user->identity->pictures))?Yii::$app->user->identity->pictures:$directoryAsset."/img/user.png";?>" class="img-circle" alt="User Image" />
                             <p>
+                           
                                 <?php if(isset(Yii::$app->user->identity->username)) {
                                     echo Yii::$app->user->identity->username;
                                 } else { ?>
@@ -55,6 +46,7 @@ use yii\helpers\Html;
                                 
                             </p>
                         </li>
+                        
                         <!-- Menu Body -->
                         <!-- <li class="user-body">
                             <div class="col-xs-4 text-center">

@@ -21,12 +21,15 @@ class User extends ActiveRecord implements IdentityInterface
     public $password_hash;
     public $email;
     public $status;
-    public $picture;
+    public $pictures;
     
     */
     public $rememberMe = true;
     private $_user = false;
     const STATUS_ACTIVE = 1;
+    const ROLE_MANAGE = 3;
+    const ROLE_ADMIN = 2;
+    const ROLE_USER = 1;
     /**
      * Overiding Method
      */
@@ -37,21 +40,21 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username','auth_key','password_hash','email','status','fname','lname'],'required'],
-            [['username','email'],'string','max'=>150],
+            [['username','auth_key','password_hash','email','status','fname','lname','role'],'required'],
+            [['username','email','pictures'],'string','max'=>150],
             [['fname','lname'],'string','max'=>25],
-            [['status'],'integer'],
-            [['auth_key','password_hash','picture'],'string'],
-            ['email','unique'],
+            [['status','role','orderID'],'integer'],
+            [['auth_key','password_hash'],'string'],
         ];
     }
 
     public function validatePassword($attribute, $params)
     {
+        var_dump($this->hasErrors());
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
+            $user = $this->getUser($this->userlogin);
 
-            if (!$user || !$user->validatePassword($this->password)) {
+            if (!$user || !$user->validatePassword(Yii::$app->security->generatePasswordHash($this->password))) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
@@ -59,21 +62,21 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function login($user)
     {    
-        return Yii::$app->user->login($this->getUser($user), $this->rememberMe ? 3600*24*30 : 0);
+        return Yii::$app->user->login($this->getUser($user),3600*24*30);
     }
 
     public function getUser($user)
     {
+        
         if ($this->_user === false) {
             $this->_user = User::findByUsername($user);
         }
-
         return $this->_user;
     }
 
     public static function findByUsername($user)
     {
-        return static::findOne(['email'=>$user]);
+        return static::findOne(['email'=>$user,'status'=>self::STATUS_ACTIVE]);
     }
 
 
@@ -112,7 +115,13 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => 'สถานะ',
             'fname' => 'ชื่อ',
             'lname' => 'นามสกุล',
-            'picture'=>'รูปภาพ'
+            'pictures'=>'รูปภาพ',
+            'role'=>'ระดับผู้ใช้'
         ];
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['userID' => 'id']);
     }
 }

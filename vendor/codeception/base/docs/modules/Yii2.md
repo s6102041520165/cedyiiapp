@@ -171,8 +171,8 @@ Useful for testing multi-step forms on a specific step.
 ```php
 <?php
 // in Helper class
-public function openCheckoutFormStep2($orderId) {
-    $this->getModule('Yii2')->_loadPage('POST', '/checkout/step2', ['order' => $orderId]);
+public function openCheckoutFormStep2($detailID) {
+    $this->getModule('Yii2')->_loadPage('POST', '/checkout/step2', ['order' => $detailID]);
 }
 ?>
 ```

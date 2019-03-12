@@ -69,6 +69,9 @@ $this->title='รายละเอียดการจอง';
                     'options' => ['class' => 'form-horizontal'],
                 ])
             ?>
+            <?= $form->field($model, 'dietRow')->hiddenInput(['value'=>$row])->label(false); ?>
+            <?= $form->field($model, 'dietCol')->hiddenInput(['value'=>$col])->label(false); ?>
+            <?= $form->field($model, 'counter')->hiddenInput(['value'=>$numOfPeople],)->label(false); ?>
             <table class="table table-bordered table-responsive table-striped">
 
                 <?php for($i=1; $i<=$numOfPeople; $i++): ?>

@@ -47,7 +47,6 @@ $config = [
         'db' => $db,
 
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
             'class' => 'yii\rbac\DbManager',
         ],
 
@@ -74,8 +73,8 @@ $config = [
                 ],
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '340272063486767',
-                    'clientSecret' => 'bc91e08a75d51c770efa930f2f65a923',
+                    'clientId' => '2382198928458324',
+                    'clientSecret' => 'ce2013485d0cb110a85e9b357d41f800',
                 ],
             ],
         ],

@@ -3,13 +3,14 @@ use yii\base\View;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\db\query;
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 $this->title='ผังแสดงโต๊ะ';
 define("MAX_BOOKING",10);
 ?>
 
-<div class="booking-booking">
-
+<div class="booking-index">
+    <?php Pjax::begin() ?>
     <div class="body-content">
         <div class="container-fluid">
             <div class="bg-green" style="max-width:800px; height:150px;margin:auto;text-align:ceter;color:white;display:flex">
@@ -74,4 +75,5 @@ define("MAX_BOOKING",10);
 
         </div>
     </div>
+    <?php Pjax::end(); ?>
 </div>

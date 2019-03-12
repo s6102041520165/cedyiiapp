@@ -26,8 +26,8 @@ class Diet extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dietRow', 'dietCol' , 'booking'], 'required'],
-            [['booking','dietCol'], 'integer'],
+            [['dietRow', 'dietCol' ], 'required'],
+            ['dietCol', 'integer'],
             [['dietRow'], 'string', 'max' => 3],
         ];
     }
@@ -39,7 +39,7 @@ class Diet extends \yii\db\ActiveRecord
     {
         return [
             'dietRow' => 'แถว',
-            'dietCol' => 'ลำดับที่นั่ง',
+            'dietCol' => 'โต๊ะ',
             'booking' => 'การจอง',
         ];
     }
