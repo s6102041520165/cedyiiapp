@@ -61,7 +61,6 @@ $this->title='รายละเอียดการจอง';
                     </tr>
                 </thead>
             </table>
-            
 
             <?php 
                 $form = ActiveForm::begin([
@@ -71,7 +70,8 @@ $this->title='รายละเอียดการจอง';
             ?>
             <?= $form->field($model, 'dietRow')->hiddenInput(['value'=>$row])->label(false); ?>
             <?= $form->field($model, 'dietCol')->hiddenInput(['value'=>$col])->label(false); ?>
-            <?= $form->field($model, 'counter')->hiddenInput(['value'=>$numOfPeople],)->label(false); ?>
+            <?= $form->field($model, 'counter')->hiddenInput(['value'=>$numOfPeople])->label(false); ?>
+	    <div class="alert alert-info">ใส่หรือไม่ใส่ชื่อ - สกุล และเบอร์โทรก็ได้</div>
             <table class="table table-bordered table-responsive table-striped">
 
                 <?php for($i=1; $i<=$numOfPeople; $i++): ?>
@@ -82,7 +82,7 @@ $this->title='รายละเอียดการจอง';
                             <?= $form->field($model, 'fname[]', 
                                 ['enableLabel' => false,
                                 'inputOptions'=>['autocomplete'=>'off','placeholder'=>'ชื่อ',],
-                                ],
+                                ]
                             ) ?>
                         </div>
                     </td>
@@ -91,7 +91,7 @@ $this->title='รายละเอียดการจอง';
                             <?= $form->field($model, 'lname[]', 
                             ['enableLabel' => false,
                                 'inputOptions'=>['autocomplete'=>'off','placeholder'=>'นามสกุล',],
-                            ],
+                            ]
                             ) ?>
                         </div>
                     </td>
@@ -102,8 +102,8 @@ $this->title='รายละเอียดการจอง';
                         <div class="container-fluid">
                             <?= $form->field($model, 'tel[]', 
                             ['enableLabel' => false,
-                            'inputOptions'=>['autocomplete'=>'off','placeholder'=>'เบอร์โทรศัพท์',],
-                            ],
+                            'inputOptions'=>['autocomplete'=>'off','placeholder'=>'เบอร์โทรศัพท์',]
+                            ]
                             ) ?>
                         </div>
                     </td>

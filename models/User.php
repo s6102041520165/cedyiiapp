@@ -43,7 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username','auth_key','password_hash','email','status','fname','lname','role'],'required'],
             [['username','email','pictures'],'string','max'=>150],
             [['fname','lname'],'string','max'=>25],
-            [['status','role','orderID'],'integer'],
+            [['status','role'],'integer'],
             [['auth_key','password_hash'],'string'],
         ];
     }
@@ -118,10 +118,5 @@ class User extends ActiveRecord implements IdentityInterface
             'pictures'=>'รูปภาพ',
             'role'=>'ระดับผู้ใช้'
         ];
-    }
-
-    public function getOrders()
-    {
-        return $this->hasMany(Order::className(), ['userID' => 'id']);
     }
 }

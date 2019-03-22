@@ -35,6 +35,8 @@ class BankController extends Controller
      */
     public function actionIndex()
     {
+	if(Yii::$app->user->isGuest || Yii::$app->user->identity->role==1)
+            throw new NotFoundHttpException('The requested page does not exist.');
         $searchModel = new BankSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -64,6 +66,8 @@ class BankController extends Controller
      */
     public function actionCreate()
     {
+	if(Yii::$app->user->isGuest || Yii::$app->user->identity->role==1)
+            throw new NotFoundHttpException('The requested page does not exist.');
         $model = new Bank();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

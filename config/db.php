@@ -6,6 +6,9 @@ return [
     'username' => 'root',
     'password' => 'Weerachai06',
     'charset' => 'utf8',
+    'on afterOpen' => function($event) { 
+         $event->sender->createCommand("SET time_zone='+07:00';")->execute(); 
+     },
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,

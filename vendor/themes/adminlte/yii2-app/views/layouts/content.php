@@ -39,8 +39,8 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2019 <a href="http://www.cedhomecoming.com">ComEdu Homecoming</a>.</strong> All rights.
+    reserved.ติดต่อ 095-7051575 และ 095-9645173
 </footer>
 
 <!-- Control Sidebar -->

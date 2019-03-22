@@ -56,12 +56,14 @@ class BookingController extends Controller
                         $data[$key][] =  $model->$key[$i];
                     }
                 }                
-            }      
+            } 
         }
+
         if($data){
-            for($i=0; $i<count($data['fname']); $i++){
+            for($i=0; $i < $orders->counter; $i++){
                 foreach ($data as $key => $value) {
                     $updateList->$key = $data[$key][$i];
+		    echo $data[fname][0];
 
                 }
                 $updateList->orderID = $orders->orderID;
@@ -139,6 +141,10 @@ class BookingController extends Controller
             $chkOrders = $Orders->find()->where(['orderID' => $model->orderID])->andwhere(['userID'=>Yii::$app->user->identity->userID])->one();
             if(!empty($chkOrders->orderID)){
                 $model->save();
+		$message = "มีรายการแจ้งชำระเงินใหม่ รหัสใบจองที่ ".$model->orderID;
+		$message.=" โดยคุณ ".$model->fname." ".$model->lname;
+		$message.=" จำนวนเงิน ".$model->amount." บาท";
+		$res = $this->notify_message($message);
                 return $this->redirect(Url::toRoute('/orders'));
             } else {
                 $model->addError('orderID', 'ไม่พบประวัติการจองของคุณ');
@@ -161,5 +167,25 @@ class BookingController extends Controller
         ]);
     }
 
-    
+    public function notify_message($message)
+    {
+        $line_api = 'https://notify-api.line.me/api/notify';
+        $line_token = 'Txy5gkw6Gv7CEY8s46llfetUuVMFzcuLdq0aXtj2RMo';
+
+        $queryData = array('message' => $message);
+        $queryData = http_build_query($queryData,'','&');
+        $headerOptions = array(
+            'http'=>array(
+                'method'=>'POST',
+                'header'=> "Content-Type: application/x-www-form-urlencoded\r\n"
+                    ."Authorization: Bearer ".$line_token."\r\n"
+                    ."Content-Length: ".strlen($queryData)."\r\n",
+                'content' => $queryData
+            )
+        );
+        $context = stream_context_create($headerOptions);
+        $result = file_get_contents($line_api, FALSE, $context);
+        $res = json_decode($result);
+        return $res;
+    }
 }

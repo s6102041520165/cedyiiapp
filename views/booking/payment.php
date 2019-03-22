@@ -10,7 +10,7 @@ use dosamigos\datepicker\DatePicker;
 $this->title = 'แจ้งชำระเงิน';
 ?>
 <div class="booking-payment">
-
+    <div class="alert alert-success">หากไม่ทราบรหัสใบจอง หรือจำไม่ได้คุณสามารถดูรหัสใบจองที่เมนูบัตรเข้างานได้</div>
     <?php $form = ActiveForm::begin([
         'options' => ['enctype' => 'multipart/form-data'],
     ]); ?>

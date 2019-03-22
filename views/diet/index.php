@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'itemOptions' => ['class' => 'item'],
                 'itemView' => function ($model, $key, $index, $widget) {
                     return Html::a(Html::encode($model->dietRow.$model->dietCol), 
-                        ['view', 'dietRow' => $model->dietRow, 'dietCol' => $model->dietCol],
+                        ['view', 'dietRow' => $model->dietRow, 'dietCol' => $model->dietCol]
                     );
                 },
                 'itemOptions' => ['class' => 'list-group-item'],

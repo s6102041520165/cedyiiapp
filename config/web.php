@@ -12,6 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'timeZone' => 'Asia/Bangkok',
     'components' => [
         
         'request' => [
@@ -70,12 +71,7 @@ $config = [
                     'class' => 'yii\authclient\clients\Google',
                     'clientId' => '976365394417-s9oc7udd3467gslbj96rum5voe4n4uct.apps.googleusercontent.com',
                     'clientSecret' => 'WjDqjJPD3VcfrX4HkkYr1uWF',
-                ],
-                'facebook' => [
-                    'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '2382198928458324',
-                    'clientSecret' => 'ce2013485d0cb110a85e9b357d41f800',
-                ],
+                ]
             ],
         ],
 
@@ -106,10 +102,18 @@ $config = [
         ],
 
 
+	'formatter' => [
+       		'dateFormat' => 'dd.MM.yyyy',
+        	'decimalSeparator' => ',',
+       	 	'thousandSeparator' => ' ',
+        	'currencyCode' => 'THB',
+  	 ],
+
+
     ],
     'params' => $params,
 ];
-
+/*
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
@@ -126,5 +130,6 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
+*/
 
 return $config;

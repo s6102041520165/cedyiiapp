@@ -39,6 +39,8 @@ class OrdersController extends Controller
      */
     public function actionIndex()
     {
+	if(Yii::$app->user->isGuest)
+            throw new NotFoundHttpException('The requested page does not exist.');
         $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -79,7 +81,7 @@ class OrdersController extends Controller
         $sql = "SELECT orders.*,orders.orderID AS id FROM `orders` 
         LEFT OUTER JOIN payment 
         ON orders.orderID = payment.orderID 
-        WHERE CURTIME() > DATE_ADD(dateBooking,INTERVAL 5 HOUR) AND status='0'; ";
+        WHERE CURTIME() > DATE_ADD(dateBooking,INTERVAL 1 DAY) AND status='0'; ";
         
         $params = [];
         $order = new Orders();
@@ -113,12 +115,23 @@ class OrdersController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+	Yii::$app->db->
+                createCommand()
+                ->delete('orders_list', ['orderID' => $id])
+                ->execute();
+
+	Yii::$app->db->
+                createCommand()
+                ->delete('payment', ['orderID' => $id])
+                ->execute();
 
         return $this->redirect(['index']);
     }
 
     public function actionActive($id)
     {
+	if($id==NULL || Yii::$app->user->identity->role==1)
+	    throw new NotFoundHttpException('The requested page does not exist.');
         $model = $this->findModel($id);
         $model->status = Orders::STATUS_YES;
         $model->update();
@@ -151,7 +164,7 @@ class OrdersController extends Controller
         $hash = md5($orderID);
         
         
-        $qrCode = (new QrCode('https://www.cedhomecoming.com/cedyiiweb/web/orders/checkin/'.$orderID))
+        $qrCode = (new QrCode('https://www.cedhomecoming.com/cedyiiapp/web/orders/checkin/'.$orderID))
             ->setSize(600)
             ->setMargin(5)
             ->useForegroundColor(51, 153, 255);
@@ -160,7 +173,7 @@ class OrdersController extends Controller
         // saving the result to a file:
 
         $dir = Yii::$app->basePath;
-        $filename = $dir."\\web\\img\\".$hash.".jpg";
+        $filename = $dir."/web/img/".$hash.".jpg";
         $qrCode->writeFile($filename); // writer defaults to PNG when none is specified
 
     }

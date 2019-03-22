@@ -33,7 +33,7 @@ class OrdersList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['orderID', 'fname', 'lname', 'tel', 'dietRow', 'dietCol'], 'required'],
+            [['orderID', 'dietRow', 'dietCol'], 'required'],
             [['orderID', 'dietCol'], 'integer'],
             [
                 ['tel'],

@@ -26,7 +26,7 @@ $fieldOptions2 = [
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">เข้าสู่ระบบบัญชี<br/> Google หรือ Facebook</p>
+        <p class="login-box-msg">เข้าสู่ระบบบัญชี<br/> Google</p>
         <hr/>
         <div class="d-inline mx-auto">
         

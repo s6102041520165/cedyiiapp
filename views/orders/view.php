@@ -28,7 +28,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
                 <?= Html::a('ไม่อนุญาต', ['unactive', 'id' => $model->orderID], [
                     'class' => 'btn btn-primary',
                     'data' => [
-                        'confirm' => 'ต้องการยืนยันประวัติการจองใช่หรือไม่?',
+                        'confirm' => 'ต้องการยกเลินประวัติการจองใช่หรือไม่?',
                         'method' => 'post',
                     ],
                 ]) ?>
@@ -36,7 +36,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
         <?php endif; ?>
 
 
-        <?php if($modelPay->orderID && (Yii::$app->user->identity->role==3 || Yii::$app->user->identity->role==2)): ?>
+        <?php if(Yii::$app->user->identity->role==3 || Yii::$app->user->identity->role==2): ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->orderID], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -108,6 +108,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
                     <tbody>
                         <?php foreach ($OrdersList as $key => $value) : ?>
                         <tr>
+			    <td><?=$OrdersList[$key]->dietRow.$OrdersList[$key]->dietCol;?></td>
                             <td>
                                 <?=$OrdersList[$key]->fname;?> <?=$OrdersList[$key]->lname?>
                             </td>

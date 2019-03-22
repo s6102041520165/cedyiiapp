@@ -15,7 +15,8 @@ $this->title = 'บัตรเข้างาน';
 <div class="orders-index">
 
     <?php Pjax::begin(); ?>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php /*echo $this->render('_search', ['model' => $searchModel]);*/ ?>
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -25,9 +26,12 @@ $this->title = 'บัตรเข้างาน';
             //'orderID',
             [
                 'attribute' => 'orderID',
-                'value' => 'user.userID'
+                'value' => 'orderID'
             ],
-            'userID',
+	    [
+		'attribute' => 'user.email',
+		'value' => 'user.email'
+	    ],
             [
                 'attribute' => 'dateBooking',
                 'filter'=> DatePicker::widget([
@@ -50,5 +54,6 @@ $this->title = 'บัตรเข้างาน';
             ],
         ],
     ]); ?>
+    </div>
     <?php Pjax::end(); ?>
 </div>

@@ -70,9 +70,26 @@ define("MAX_BOOKING",10);
                 }
                 echo "</table>";
                 ?>
-                        
             </div>
-
+	  <div style="margin:auto;max-width:800px;"><hr> 
+	     <h2>หมายเหตุ</h2>
+	    <ul class="list-group">
+		<li class="list-group-item">
+                     เลือกโต๊ะที่ท่านต้องการ 
+                </li>
+		<li class="list-group-item">
+                     <b>โปรดตัดสินใจก่อนจองโต๊ะ</b> ระบบจะลบประวัติการจองของคุณ หากไม่แจ้งชำระเงินภายใน 1 วัน 
+                </li>
+  		<li class="list-group-item">
+		     <span class="btn btn-primary" style="border-radius:50%">10</span> 
+             หมายถึง จำนวนเก้าอี้ที่เหลือ ที่ท่านสามารถจองได้
+		</li>
+  		<li class="list-group-item">
+		     <span class="btn btn-danger" style="border-radius:50%">0</span> 
+             หมายถึง โต๊ะที่มีการจองครบ <span class="label label-danger">ท่านไม่สามารถจองได้</span>
+		</li>
+	   </ul>
+	  </div>
         </div>
     </div>
     <?php Pjax::end(); ?>

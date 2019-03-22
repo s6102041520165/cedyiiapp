@@ -19,8 +19,9 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['orderID', 'userID'], 'integer','message'=>'กรุณาป้อนตัวเลข'],
+            [['orderID'], 'integer','message'=>'กรุณาป้อนตัวเลข'],
             [['dateBooking'], 'safe','message'=>'กรุณาข้อมูลวันที่'],
+	    [['userID'],'integer','message'=>'กรุณาป้อนรหัสสมาชิก'],
             [['price'], 'number','message'=>'กรุณาป้อนตัวเลข'],
         ];
     }
@@ -48,7 +49,7 @@ class OrdersSearch extends Orders
             $condition = ['user.userID'=>Yii::$app->user->identity->userID];
         }
         $query = Orders::find()
-        ->joinWith('user')
+        ->joinWith(['user'])
         ->where($condition);
         //$query = User::find()->where(['userID'=>Yii::$app->user->identity->userID]);
 
@@ -56,6 +57,7 @@ class OrdersSearch extends Orders
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+	    'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         $this->load($params);
@@ -67,14 +69,13 @@ class OrdersSearch extends Orders
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            //'or', Use or
-            //['like', 'profiles.first_name', $this->userFullName],   Use like
-            'orderID' => $this->orderID,
-            'orders.userID' => $this->userID,
-            'orders.dateBooking' =>$this->dateBooking,
-            //['like','orders.dateBooking' , $this->dateBooking],
-            'price' => $this->price,
+        $query->andFilterWhere(['like','user.email' , $this->userID])
+
+	->andFilterWhere([
+            'and',
+            ['orderID' => $this->orderID],
+            ['like','dateBooking' , $this->dateBooking],
+            ['price' => $this->price],
         ]);
 
         return $dataProvider;

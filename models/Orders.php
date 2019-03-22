@@ -22,6 +22,7 @@ class Orders extends \yii\db\ActiveRecord
     public $counter;
     const STATUS_NO = 0;
     const STATUS_YES = 1;
+    public $email;
     public static function tableName()
     {
         return 'orders';
@@ -37,6 +38,7 @@ class Orders extends \yii\db\ActiveRecord
             [['userID','status'], 'integer'],
             [['dateBooking'], 'safe'],
             [['price'], 'number'],
+	    [['email'],'string']
         ];
     }
 
