@@ -162,6 +162,8 @@ class OrdersController extends Controller
     public function actionCheckin($id)
     {
         $model = $this->findModel($id);
+        if((!Yii::$app->user->identity->role==3) || (!Yii::$app->user->identity->role==2))
+            throw new NotFoundHttpException('The requested page does not exist.');
         return $this->render('checkin', ['model'=>$model]);
     }
 
