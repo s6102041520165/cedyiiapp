@@ -161,7 +161,7 @@ class OrdersController extends Controller
 
     public function actionCheckin($id)
     {
-        return $this->render('views', $id);
+        return $this->render('checkin', $id);
     }
 
     public function activeQr($orderID){
