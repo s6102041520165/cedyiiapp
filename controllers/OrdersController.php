@@ -161,6 +161,7 @@ class OrdersController extends Controller
 
     public function actionCheckin($id)
     {
+        var_dump($id);die();
         return $this->render('checkin', $id);
     }
 
