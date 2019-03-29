@@ -101,6 +101,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
                             <th colspan="2" style="text-align:center">คุณและเพื่อน</th>
                         </tr>
                         <tr>
+                            <th>โต๊ะ</th>
                             <th>ชื่อ - สกุล</th>
                             <th>เบอร์โทร</th>
                         </tr>
