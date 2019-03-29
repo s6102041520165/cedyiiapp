@@ -159,12 +159,17 @@ class OrdersController extends Controller
         return $this->redirect(['view','id'=>$id]);
     }
 
+    public function actionCheckin($id)
+    {
+        return $this->render('views', $id);
+    }
+
     public function activeQr($orderID){
         //Generate Random String
         $hash = md5($orderID);
         
         
-        $qrCode = (new QrCode('https://www.cedhomecoming.com/cedyiiapp/web/orders/checkin/'.$orderID))
+        $qrCode = (new QrCode('http://www.cedhomecoming.com/cedyiiapp/web/orders/checkin/'.$orderID))
             ->setSize(600)
             ->setMargin(5)
             ->useForegroundColor(51, 153, 255);
