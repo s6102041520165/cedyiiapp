@@ -161,8 +161,8 @@ class OrdersController extends Controller
 
     public function actionCheckin($id)
     {
-        var_dump($id);die();
-        return $this->render('checkin', $id);
+        $model = $this->findModel($id);
+        return $this->render('checkin', ['model'=>$model]);
     }
 
     public function activeQr($orderID){

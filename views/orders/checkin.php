@@ -8,9 +8,9 @@ use dosamigos\datepicker\DatePicker;
 /* @var $model app\models\Orders */
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 \yii\web\YiiAsset::register($this);
-$this->title = "เช็คอิน : ".$id;
+$this->title = "เช็คอิน : ".$model->orderID;
 
 ?>
 <div class="orders-view">
-    <?=$id?>
+    <?=$model->orderID?>
 </div>
