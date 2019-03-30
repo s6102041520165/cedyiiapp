@@ -13,7 +13,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
 ?>
 <div class="orders-view">
     <p>
-        <?php if($modelPay->orderID && (Yii::$app->user->identity->role==3 || Yii::$app->user->identity->role==2)): ?>
+        <?php if(Yii::$app->user->identity->role==3 || Yii::$app->user->identity->role==2): ?>
             <?php if($model->status==0) : ?>
                 <?= Html::a('อนุญาต', ['active', 'id' => $model->orderID], [
                     'class' => 'btn btn-primary',
@@ -109,7 +109,7 @@ $this->title = "ประวัติการจอง : ".$model->orderID;
                     <tbody>
                         <?php foreach ($OrdersList as $key => $value) : ?>
                         <tr>
-			    <td><?=$OrdersList[$key]->dietRow.$OrdersList[$key]->dietCol;?></td>
+			                <td><?=$OrdersList[$key]->dietRow.$OrdersList[$key]->dietCol;?></td>
                             <td>
                                 <?=$OrdersList[$key]->fname;?> <?=$OrdersList[$key]->lname?>
                             </td>

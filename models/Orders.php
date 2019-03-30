@@ -35,10 +35,10 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['userID', 'price'], 'required'],
-            [['userID','status'], 'integer'],
+            [['userID','status','checkin'], 'integer'],
             [['dateBooking'], 'safe'],
             [['price'], 'number'],
-	    [['email'],'string']
+	        [['email'],'string']
         ];
     }
 
@@ -53,6 +53,7 @@ class Orders extends \yii\db\ActiveRecord
             'dateBooking' => 'วันที่จอง',
             'price' => 'ราคา',
             'status' => 'สถานะ',
+            'checkin' => 'สถานะเช็คอิน',
         ];
     }
 

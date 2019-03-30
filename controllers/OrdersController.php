@@ -162,9 +162,25 @@ class OrdersController extends Controller
     public function actionCheckin($id)
     {
         $model = $this->findModel($id);
+        $guest = OrdersList::find()->where(['orderID'=>$model->orderID])->count();
+        $modelList = OrdersList::find()->where(['orderID'=>$model->orderID])->all();
+        /* test show value on propety*/
+        foreach ($modelList as $key => $value) {
+            if($key>0)
+                continue;
+            $diet = $value->dietRow.$value->dietCol;
+        }/**/
+        if($model->checkin=='0'){
+            $model->checkin='1';
+            $model->update();
+            $message = "โต๊ะ $diet ได้เช็คอิน จำนวน $guest ที่นั่ง ";
+            $this->notify_message($message);
+        }
+        
+
         if((!Yii::$app->user->identity->role==3) || (!Yii::$app->user->identity->role==2))
             throw new NotFoundHttpException('The requested page does not exist.');
-        return $this->render('checkin', ['model'=>$model]);
+        return $this->render('checkin', ['modelOrder'=>$model,'guest'=>$guest,'modelList'=>$modelList]);
     }
 
     public function activeQr($orderID){
@@ -172,7 +188,7 @@ class OrdersController extends Controller
         $hash = md5($orderID);
         
         
-        $qrCode = (new QrCode('http://www.cedhomecoming.com/cedyiiapp/web/orders/checkin/'.$orderID))
+        $qrCode = (new QrCode('https://www.cedhomecoming.com/cedyiiapp/web/orders/checkin/'.$orderID))
             ->setSize(600)
             ->setMargin(5)
             ->useForegroundColor(51, 153, 255);
@@ -184,6 +200,28 @@ class OrdersController extends Controller
         $filename = $dir."/web/img/".$hash.".jpg";
         $qrCode->writeFile($filename); // writer defaults to PNG when none is specified
 
+    }
+
+    public function notify_message($message)
+    {
+        $line_api = 'https://notify-api.line.me/api/notify';
+        $line_token = 'Txy5gkw6Gv7CEY8s46llfetUuVMFzcuLdq0aXtj2RMo';
+
+        $queryData = array('message' => $message);
+        $queryData = http_build_query($queryData,'','&');
+        $headerOptions = array(
+            'http'=>array(
+                'method'=>'POST',
+                'header'=> "Content-Type: application/x-www-form-urlencoded\r\n"
+                    ."Authorization: Bearer ".$line_token."\r\n"
+                    ."Content-Length: ".strlen($queryData)."\r\n",
+                'content' => $queryData
+            )
+        );
+        $context = stream_context_create($headerOptions);
+        $result = file_get_contents($line_api, FALSE, $context);
+        $res = json_decode($result);
+        return $res;
     }
 
     /**

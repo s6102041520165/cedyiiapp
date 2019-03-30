@@ -39,7 +39,7 @@ class Payment extends \yii\db\ActiveRecord
             [['fname', 'lname'], 'string', 'max' => 25],
             [['attach'], 'file',
                 'skipOnEmpty' => true,
-                'extensions' => 'png,jpg'
+                'extensions' => 'png,jpg,jpeg,gif'
             ],
             [['orderID'], 'unique'],
         ];

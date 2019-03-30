@@ -141,10 +141,10 @@ class BookingController extends Controller
             $chkOrders = $Orders->find()->where(['orderID' => $model->orderID])->andwhere(['userID'=>Yii::$app->user->identity->userID])->one();
             if(!empty($chkOrders->orderID)){
                 $model->save();
-		$message = "มีรายการแจ้งชำระเงินใหม่ รหัสใบจองที่ ".$model->orderID;
-		$message.=" โดยคุณ ".$model->fname." ".$model->lname;
-		$message.=" จำนวนเงิน ".$model->amount." บาท";
-		$res = $this->notify_message($message);
+                $message = "มีรายการแจ้งชำระเงินใหม่ รหัสใบจองที่ ".$model->orderID;
+                $message.=" โดยคุณ ".$model->fname." ".$model->lname;
+                $message.=" จำนวนเงิน ".$model->amount." บาท";
+                $res = $this->notify_message($message);
                 return $this->redirect(Url::toRoute('/orders'));
             } else {
                 $model->addError('orderID', 'ไม่พบประวัติการจองของคุณ');
