@@ -25,6 +25,9 @@ class BookingController extends Controller
      */
     public function actionStep1()
     {
+        if(Yii::$app->user->isGuest){
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
         $model = new OrdersList();
         $updateList = new OrdersList();
         $orders = new Orders();
@@ -93,6 +96,9 @@ class BookingController extends Controller
     } 
 
     public function actionIndex(){
+        if(Yii::$app->user->isGuest){
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
         $Diet = new Diet();
         $getDietRow = Diet::find()
                 ->select('dietRow')
