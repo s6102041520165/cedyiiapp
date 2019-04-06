@@ -205,7 +205,7 @@ class OrdersController extends Controller
     public function notify_message($message)
     {
         $line_api = 'https://notify-api.line.me/api/notify';
-        $line_token = 'Txy5gkw6Gv7CEY8s46llfetUuVMFzcuLdq0aXtj2RMo';
+        $line_token = 'your-linetoken';
 
         $queryData = array('message' => $message);
         $queryData = http_build_query($queryData,'','&');
